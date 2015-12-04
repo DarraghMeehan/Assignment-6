@@ -49,8 +49,9 @@ public class CloudscapeDataAccess
         sqlFind = connection.prepareStatement(
                 "SELECT names.personID, firstName, lastName, " +
                         "addressID, address1, address2, city, county, " +
-                        "phoneID, phoneNumber, emailID, " +
-                        "emailAddress " +
+                            "address1EXTRA, address2EXTRA, cityEXTRA, countyEXTRA," +
+                        "phoneID, phoneNumber, phoneNumberExtra,  " +
+                        "emailID, emailAddress, emailAddressEXTRA, " +
                         "FROM names, addresses, phoneNumbers, emailAddresses " +
                         "WHERE lastName = ? AND " +
                         "names.personID = addresses.personID AND " +
@@ -76,20 +77,20 @@ public class CloudscapeDataAccess
         // insert address in table addresses
         sqlInsertAddress = connection.prepareStatement(
                 "INSERT INTO addresses ( personID, address1, " +
-                        "address2, city, county ) " +
-                        "VALUES ( ? , ? , ? , ? , ? )" );
+                        "address2, city, county, address1EXTRA, address2EXTRA, cityEXTRA, countyEXTRA ) " +
+                        "VALUES ( ? , ? , ? , ? , ?, ?, ?, ?, ? )" );
 
         // insert phone number in table phoneNumbers
         sqlInsertPhone = connection.prepareStatement(
                 "INSERT INTO phoneNumbers " +
-                        "( personID, phoneNumber) " +
-                        "VALUES ( ? , ? )" );
+                        "( personID, phoneNumber, phoneNumberEXTRA) " +
+                        "VALUES ( ? , ?, ? )" );
 
         // insert email in table emailAddresses
         sqlInsertEmail = connection.prepareStatement(
                 "INSERT INTO emailAddresses " +
-                        "( personID, emailAddress ) " +
-                        "VALUES ( ? , ? )" );
+                        "( personID, emailAddress, emailAddressEXTRA ) " +
+                        "VALUES ( ? , ?, ? )" );
 
         // update first and last names in table names
         sqlUpdateName = connection.prepareStatement(
@@ -98,18 +99,18 @@ public class CloudscapeDataAccess
 
         // update address in table addresses
         sqlUpdateAddress = connection.prepareStatement(
-                "UPDATE addresses SET address1 = ?, address2 = ?, " +
-                        "city = ?, county = ? " +
+                "UPDATE addresses SET address1 = ?, address2 = ?, city = ?, county = ?, " +
+                        " address1EXTRA = ?, address2EXTRA = ?, cityEXTRA = ?, countyEXTRA = ?" +
                         "WHERE addressID = ?" );
 
         // update phone number in table phoneNumbers
         sqlUpdatePhone = connection.prepareStatement(
-                "UPDATE phoneNumbers SET phoneNumber = ? " +
+                "UPDATE phoneNumbers SET phoneNumber = ?, phoneNumberEXTRA = ? " +
                         "WHERE phoneID = ?" );
 
         // update email in table emailAddresses
         sqlUpdateEmail = connection.prepareStatement(
-                "UPDATE emailAddresses SET emailAddress = ? " +
+                "UPDATE emailAddresses SET emailAddress = ?, emailAddressEXTRA = ?" +
                         "WHERE emailID = ?" );
 
         // Delete row from table names. This must be executed
@@ -142,7 +143,7 @@ public class CloudscapeDataAccess
         String driver = "com.mysql.jdbc.Driver";
 
         // URL to connect to addressbook database
-        String url = "jdbc:mysql://localhost:3306/addressbook";
+        String url = "jdbc:mysql://localhost:3306/myaddressbook";
         String user = "root";
         String password = "armvye123";
 
@@ -185,11 +186,19 @@ public class CloudscapeDataAccess
                 person.setCity(resultSet.getString(7));
                 person.setCounty(resultSet.getString(8));
 
-                person.setPhoneID(resultSet.getInt(9));
-                person.setPhoneNumber(resultSet.getString(10));
+                person.setAddress1Extra(resultSet.getString(9));
+                person.setAddress2Extra(resultSet.getString(10));
+                person.setCityExtra(resultSet.getString(11));
+                person.setCountyExtra(resultSet.getString(12));
 
-                person.setEmailID(resultSet.getInt(11));
-                person.setEmailAddress(resultSet.getString(12));
+                person.setPhoneID(resultSet.getInt(13));
+                person.setPhoneNumber(resultSet.getString(14));
+                person.setPhoneNumberExtra(resultSet.getString(15));
+
+                person.setEmailID(resultSet.getInt(16));
+                person.setEmailAddress(resultSet.getString(17));
+                person.setEmailAddressExtra(resultSet.getString(18));
+
                 myPersonList.add(person);
             }
             // return AddressBookEntry
@@ -228,7 +237,11 @@ public class CloudscapeDataAccess
             sqlUpdateAddress.setString( 2, person.getAddress2() );
             sqlUpdateAddress.setString( 3, person.getCity() );
             sqlUpdateAddress.setString( 4, person.getCounty() );
-            sqlUpdateAddress.setInt( 5, person.getAddressID() );
+            sqlUpdateAddress.setString( 5, person.getAddress1Extra() );
+            sqlUpdateAddress.setString( 6, person.getAddress2Extra() );
+            sqlUpdateAddress.setString( 7, person.getCityExtra() );
+            sqlUpdateAddress.setString( 8, person.getCountyExtra() );
+            sqlUpdateAddress.setInt( 9, person.getAddressID() );
             result = sqlUpdateAddress.executeUpdate();
 
             // if update fails, rollback and discontinue
@@ -239,7 +252,8 @@ public class CloudscapeDataAccess
 
             // update phoneNumbers table
             sqlUpdatePhone.setString( 1, person.getPhoneNumber() );
-            sqlUpdatePhone.setInt( 2, person.getPhoneID() );
+            sqlUpdatePhone.setString( 2, person.getPhoneNumberExtra() );
+            sqlUpdatePhone.setInt( 3, person.getPhoneID() );
             result = sqlUpdatePhone.executeUpdate();
 
             // if update fails, rollback and discontinue
@@ -250,7 +264,8 @@ public class CloudscapeDataAccess
 
             // update emailAddresses table
             sqlUpdateEmail.setString( 1, person.getEmailAddress() );
-            sqlUpdateEmail.setInt( 2, person.getEmailID() );
+            sqlUpdateEmail.setString( 2, person.getEmailAddressExtra() );
+            sqlUpdateEmail.setInt( 3, person.getEmailID() );
             result = sqlUpdateEmail.executeUpdate();
 
             // if update fails, rollback and discontinue
@@ -315,6 +330,15 @@ public class CloudscapeDataAccess
                         person.getCity() );
                 sqlInsertAddress.setString( 5,
                         person.getCounty() );
+                sqlInsertAddress.setString( 6,
+                        person.getAddress1Extra() );
+                sqlInsertAddress.setString( 7,
+                        person.getAddress2Extra() );
+                sqlInsertAddress.setString( 8,
+                        person.getCityExtra() );
+                sqlInsertAddress.setString( 9,
+                        person.getCountyExtra() );
+
                 result = sqlInsertAddress.executeUpdate();
 
                 // if insert fails, rollback and discontinue
@@ -327,6 +351,8 @@ public class CloudscapeDataAccess
                 sqlInsertPhone.setInt( 1, personID );
                 sqlInsertPhone.setString( 2,
                         person.getPhoneNumber() );
+                sqlInsertPhone.setString( 3,
+                        person.getPhoneNumberExtra() );
                 result = sqlInsertPhone.executeUpdate();
 
                 // if insert fails, rollback and discontinue
@@ -339,6 +365,8 @@ public class CloudscapeDataAccess
                 sqlInsertEmail.setInt( 1, personID );
                 sqlInsertEmail.setString( 2,
                         person.getEmailAddress() );
+                sqlInsertEmail.setString( 3,
+                        person.getEmailAddressExtra() );
                 result = sqlInsertEmail.executeUpdate();
 
                 // if insert fails, rollback and discontinue

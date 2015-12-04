@@ -18,6 +18,13 @@ public class AddressBookEntry {
     private int phoneID;
     private int emailID;
 
+    private String address1Extra = "";
+    private String address2Extra = "";
+    private String cityExtra = "";
+    private String countyExtra = "";
+    private String phoneNumberExtra = "";
+    private String emailAddressExtra = "";
+
     // empty constructor
     public AddressBookEntry()
     {
@@ -165,6 +172,66 @@ public class AddressBookEntry {
     public int getEmailID()
     {
         return emailID;
+    }
+
+    public String getAddress1Extra() {
+
+        return address1Extra;
+    }
+
+    public void setAddress1Extra(String address1Extra) {
+
+        this.address1Extra = address1Extra;
+    }
+
+    public String getAddress2Extra() {
+
+        return address2Extra;
+    }
+
+    public void setAddress2Extra(String address2Extra) {
+
+        this.address2Extra = address2Extra;
+    }
+
+    public String getCityExtra() {
+
+        return cityExtra;
+    }
+
+    public void setCityExtra(String cityExtra) {
+
+        this.cityExtra = cityExtra;
+    }
+
+    public String getCountyExtra() {
+
+        return countyExtra;
+    }
+
+    public void setCountyExtra(String countyExtra) {
+
+        this.countyExtra = countyExtra;
+    }
+
+    public String getPhoneNumberExtra() {
+
+        return phoneNumberExtra;
+    }
+
+    public void setPhoneNumberExtra(String phoneNumberExtra) {
+
+        this.phoneNumberExtra = phoneNumberExtra;
+    }
+
+    public String getEmailAddressExtra() {
+
+        return emailAddressExtra;
+    }
+
+    public void setEmailAddressExtra(String emailAddressExtra) {
+
+        this.emailAddressExtra = emailAddressExtra;
     }
 }  // end class AddressBookEntry
 
