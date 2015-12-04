@@ -152,15 +152,21 @@ public class AddressBook extends JFrame {
     // method to launch program execution
     public static void main( String args[] )
     {
-        {
-            try {
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        // Making my code threadsafe
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    UIManager.setLookAndFeel
+                            ("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+                    //new AddressBook();
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+                new AddressBook();
             }
-            catch(Exception e){
-                e.printStackTrace();
-            }
-            new AddressBook();
-        }
+        });
     }
 
     // Private inner class defines action that enables
