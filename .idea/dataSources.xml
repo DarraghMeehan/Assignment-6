@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3838977985">
-    <data-source source="LOCAL" name="MySQL - addressbook@localhost" uuid="d0200a41-0076-4b77-99b0-d59c55832776">
-      <driver-ref>mysql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/addressbook</jdbc-url>
-      <driver-properties>
-        <property name="zeroDateTimeBehavior" value="convertToNull" />
-        <property name="tinyInt1isBit" value="false" />
-        <property name="characterEncoding" value="utf8" />
-        <property name="characterSetResults" value="utf8" />
-        <property name="yearIsDateType" value="false" />
-      </driver-properties>
-      <libraries />
-    </data-source>
+  <component name="DataSourceManagerImpl" format="xml" hash="2868848697">
     <data-source source="LOCAL" name="MySQL - myaddressbook@localhost" uuid="995db3a2-8cd9-48e0-909e-e3d72ab82523">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>

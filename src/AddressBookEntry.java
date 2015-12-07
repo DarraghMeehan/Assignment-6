@@ -18,12 +18,12 @@ public class AddressBookEntry {
     private int phoneID;
     private int emailID;
 
-    private String address1Extra = "";
-    private String address2Extra = "";
-    private String cityExtra = "";
-    private String countyExtra = "";
-    private String phoneNumberExtra = "";
-    private String emailAddressExtra = "";
+    private String address1EXTRA = "";
+    private String address2EXTRA = "";
+    private String cityEXTRA = "";
+    private String countyEXTRA = "";
+    private String phoneNumberEXTRA = "";
+    private String emailAddressEXTRA = "";
 
     // empty constructor
     public AddressBookEntry()
@@ -174,64 +174,64 @@ public class AddressBookEntry {
         return emailID;
     }
 
-    public String getAddress1Extra() {
+    public String getAddress1EXTRA() {
 
-        return address1Extra;
+        return address1EXTRA;
     }
 
-    public void setAddress1Extra(String address1Extra) {
+    public void setAddress1EXTRA(String address1EXTRA) {
 
-        this.address1Extra = address1Extra;
+        this.address1EXTRA = address1EXTRA;
     }
 
-    public String getAddress2Extra() {
+    public String getAddress2EXTRA() {
 
-        return address2Extra;
+        return address2EXTRA;
     }
 
-    public void setAddress2Extra(String address2Extra) {
+    public void setAddress2EXTRA(String address2EXTRA) {
 
-        this.address2Extra = address2Extra;
+        this.address2EXTRA = address2EXTRA;
     }
 
-    public String getCityExtra() {
+    public String getCityEXTRA() {
 
-        return cityExtra;
+        return cityEXTRA;
     }
 
-    public void setCityExtra(String cityExtra) {
+    public void setCityEXTRA(String cityEXTRA) {
 
-        this.cityExtra = cityExtra;
+        this.cityEXTRA = cityEXTRA;
     }
 
-    public String getCountyExtra() {
+    public String getCountyEXTRA() {
 
-        return countyExtra;
+        return countyEXTRA;
     }
 
-    public void setCountyExtra(String countyExtra) {
+    public void setCountyEXTRA(String countyEXTRA) {
 
-        this.countyExtra = countyExtra;
+        this.countyEXTRA = countyEXTRA;
     }
 
-    public String getPhoneNumberExtra() {
+    public String getPhoneNumberEXTRA() {
 
-        return phoneNumberExtra;
+        return phoneNumberEXTRA;
     }
 
-    public void setPhoneNumberExtra(String phoneNumberExtra) {
+    public void setPhoneNumberEXTRA(String phoneNumberEXTRA) {
 
-        this.phoneNumberExtra = phoneNumberExtra;
+        this.phoneNumberEXTRA = phoneNumberEXTRA;
     }
 
-    public String getEmailAddressExtra() {
+    public String getEmailAddressEXTRA() {
 
-        return emailAddressExtra;
+        return emailAddressEXTRA;
     }
 
-    public void setEmailAddressExtra(String emailAddressExtra) {
+    public void setEmailAddressEXTRA(String emailAddressEXTRA) {
 
-        this.emailAddressExtra = emailAddressExtra;
+        this.emailAddressEXTRA = emailAddressEXTRA;
     }
 }  // end class AddressBookEntry
 
